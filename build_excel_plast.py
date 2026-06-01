@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """
-Costruisce espositori_tuttofood_2026.xlsx a partire da espositori_tuttofood_2026.csv.
+Costruisce espositori_plast_2026.xlsx a partire da espositori_plast_2026.csv.
 
 Foglio "Espositori":
-  - tutte le righe del CSV
-  - header in grassetto, freeze pane sulla riga 1, autofilter
+  - tutte le righe del CSV, header in grassetto, freeze pane, autofilter
   - larghezza colonne adattata al contenuto (con cap)
 
 Foglio "Statistiche":
-  - totale espositori
-  - top 20 città
-  - top 20 paesi
-  - distribuzione per regione italiana
+  - totali (co-espositori, italiani/esteri)
+  - top 20 citta / paesi
+  - distribuzione per regione e per padiglione
+  - coverage campi (% righe valorizzate)
+
+Uso:
+    python build_excel_plast.py
 """
 import csv
 from collections import Counter
@@ -22,12 +24,12 @@ from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
 OUT_DIR = Path(__file__).parent
-CSV_PATH = OUT_DIR / "espositori_tuttofood_2026.csv"
-XLSX_PATH = OUT_DIR / "espositori_tuttofood_2026.xlsx"
+CSV_PATH = OUT_DIR / "espositori_plast_2026.csv"
+XLSX_PATH = OUT_DIR / "espositori_plast_2026.xlsx"
 
 MAX_COL_WIDTH = 60
 MIN_COL_WIDTH = 10
-HEADER_FILL = PatternFill("solid", fgColor="1F4E78")
+HEADER_FILL = PatternFill("solid", fgColor="1560BD")
 HEADER_FONT = Font(bold=True, color="FFFFFF")
 SECTION_FONT = Font(bold=True, size=12)
 
@@ -62,7 +64,6 @@ def build_espositori(wb, headers, rows):
     for r in rows:
         ws.append([r.get(h, "") for h in headers])
 
-    # freeze + autofilter
     ws.freeze_panes = "A2"
     ws.auto_filter.ref = f"A1:{get_column_letter(len(headers))}{ws.max_row}"
     autosize(ws, headers, rows)
@@ -87,7 +88,6 @@ def add_table(ws, header_row, data_rows):
 def build_statistiche(wb, rows):
     ws = wb.create_sheet("Statistiche")
 
-    # 1. Totale
     ws.append(["Totale espositori", len(rows)])
     ws.cell(row=1, column=1).font = SECTION_FONT
     coesp = sum(1 for r in rows if (r.get("coespositore") or "").strip() == "1")
@@ -97,29 +97,25 @@ def build_statistiche(wb, rows):
     ws.append(["Espositori italiani", italiani])
     ws.append(["Espositori esteri", len(rows) - italiani])
 
-    # 2. Top 20 città
-    add_section(ws, "Top 20 città")
+    add_section(ws, "Top 20 citta")
     citta_counter = Counter(
         (r.get("citta") or "").strip().upper() for r in rows if (r.get("citta") or "").strip()
     )
-    add_table(ws, ["Città", "Espositori"], citta_counter.most_common(20))
+    add_table(ws, ["Citta", "Espositori"], citta_counter.most_common(20))
 
-    # 3. Top 20 paesi
     add_section(ws, "Top 20 paesi")
     paese_counter = Counter(
         (r.get("paese") or "").strip().upper() for r in rows if (r.get("paese") or "").strip()
     )
     add_table(ws, ["Paese", "Espositori"], paese_counter.most_common(20))
 
-    # 4. Regioni italiane
     add_section(ws, "Distribuzione per regione italiana")
     reg_counter = Counter(
         (r.get("regione") or "").strip() for r in rows if (r.get("regione") or "").strip()
     )
     add_table(ws, ["Regione", "Espositori"], sorted(reg_counter.items(), key=lambda x: -x[1]))
 
-    # 5. Padiglioni
-    add_section(ws, "Distribuzione per padiglione (Tuttofood Milano)")
+    add_section(ws, "Distribuzione per padiglione")
     pad_counter = Counter(
         (r.get("padiglione") or "").strip() for r in rows if (r.get("padiglione") or "").strip()
     )
@@ -129,7 +125,6 @@ def build_statistiche(wb, rows):
         sorted(pad_counter.items(), key=lambda x: (len(x[0]), x[0])),
     )
 
-    # 6. Coverage campi (% non-vuoti)
     add_section(ws, "Coverage campi (% righe valorizzate)")
     add_table(ws, ["Campo", "% valorizzato", "N. valorizzati"], [])
     n = max(1, len(rows))
@@ -137,7 +132,6 @@ def build_statistiche(wb, rows):
         filled = sum(1 for r in rows if (r.get(h) or "").strip())
         ws.append([h, f"{filled / n * 100:.1f}%", filled])
 
-    # widths
     for col_idx in range(1, 4):
         ws.column_dimensions[get_column_letter(col_idx)].width = 35
 

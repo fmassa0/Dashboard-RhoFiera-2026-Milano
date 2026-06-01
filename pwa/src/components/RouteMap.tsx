@@ -66,14 +66,14 @@ export function RouteMap({ route, startHall, visits, imageBase }: Props) {
               markerHeight="3"
               orient="auto-start-reverse"
             >
-              <path d="M0,0 L10,5 L0,10 Z" fill="#e30613" />
+              <path d="M0,0 L10,5 L0,10 Z" fill="#1560bd" />
             </marker>
           </defs>
 
           <polyline
             points={pathPoints.map((p) => `${p.x},${p.y}`).join(" ")}
             fill="none"
-            stroke="#e30613"
+            stroke="#1560bd"
             strokeWidth="0.7"
             strokeDasharray="1.6 1.1"
             strokeLinecap="round"
@@ -110,7 +110,7 @@ export function RouteMap({ route, startHall, visits, imageBase }: Props) {
           {drawableStops.map((stop, idx) => {
             const c = HALL_CENTROIDS[stop.hall];
             const allVisited = stop.exhibitors.every((e) => visits[e.id]?.visited);
-            const fill = allVisited ? "#10b981" : "#e30613";
+            const fill = allVisited ? "#10b981" : "#1560bd";
             return (
               <g key={stop.hall}>
                 <circle

@@ -6,7 +6,7 @@ import type { AllVisits, Exhibitor } from "../types";
 
 export interface ReportOptions {
   includePhotos: boolean;
-  /** "Tuttofood 2026" o un titolo personalizzato del documento */
+  /** "PLAST 2026" o un titolo personalizzato del documento */
   title?: string;
 }
 
@@ -182,7 +182,7 @@ export async function generateVisitReport(
   const cur: Cursor = { doc, y: MARGIN };
 
   // ====== Header / cover sulla prima pagina ======
-  writeWrapped(cur, options.title ?? "Tuttofood 2026 — Report visite", 22, {
+  writeWrapped(cur, options.title ?? "PLAST 2026 — Report visite", 22, {
     bold: true,
   });
   cur.y += 1;

@@ -2,8 +2,9 @@ import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
-// IMPORTANT: deploying under https://<user>.github.io/Dashboard-Tuttofood-2026-Milano/
-// requires base = "/Dashboard-Tuttofood-2026-Milano/". Override via VITE_BASE.
+// IMPORTANT: deploying under https://<user>.github.io/<repo>/ requires
+// base = "/<repo>/". In CI (.github/workflows/pages.yml) VITE_BASE è impostato
+// dinamicamente al nome del repo, quindi un rename del repo non richiede modifiche.
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, ".", "");
   const base = env.VITE_BASE ?? "./";
@@ -13,14 +14,14 @@ export default defineConfig(({ mode }) => {
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.svg", "hall-plan.png", "icons/*.png"],
+      includeAssets: ["favicon.svg", "hall-plan-padiglioni.png", "icons/*.png"],
       manifest: {
-        name: "Tuttofood 2026 - Visite Espositori",
-        short_name: "TF26 Visite",
+        name: "PLAST 2026 - Visite Espositori",
+        short_name: "PLAST26 Visite",
         description:
-          "Consulta gli espositori di Tuttofood 2026, segna le visite e prendi note. Funziona offline.",
+          "Consulta gli espositori di PLAST 2026, segna le visite e prendi note. Funziona offline.",
         lang: "it",
-        theme_color: "#e30613",
+        theme_color: "#1560bd",
         background_color: "#0b0b0c",
         display: "standalone",
         orientation: "portrait",

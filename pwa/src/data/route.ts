@@ -45,7 +45,7 @@ export function optimizeRoute(
 
   // Nearest-neighbor partendo dal centroide di `start`. Se start è esso stesso
   // un padiglione da visitare lo prendiamo per primo (distanza 0).
-  const startPoint = HALL_CENTROIDS[start] ?? HALL_CENTROIDS[knownHalls[0] ?? "12"];
+  const startPoint = HALL_CENTROIDS[start] ?? HALL_CENTROIDS[knownHalls[0] ?? "9"];
   const remaining = new Set(knownHalls);
   const ordered: string[] = [];
   let cur = startPoint;
@@ -94,7 +94,7 @@ export function formatRouteAsText(
 ): string {
   const totalStands = route.stops.reduce((s, st) => s + st.exhibitors.length, 0);
   const lines: string[] = [];
-  lines.push("Tuttofood 2026 — il mio percorso");
+  lines.push("PLAST 2026 — il mio percorso");
   lines.push(
     `${totalStands} ${totalStands === 1 ? "stand" : "stand"} · ${
       route.stops.length

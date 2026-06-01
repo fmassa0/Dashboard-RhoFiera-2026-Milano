@@ -18,7 +18,7 @@ export function App() {
     return (
       <div className="h-full flex items-center justify-center">
         <div className="text-center">
-          <div className="text-3xl font-bold text-brand-500">TF26</div>
+          <div className="text-3xl font-bold text-brand-500">PLAST26</div>
           <div className="mt-2 text-sm text-neutral-500">Caricamento espositori…</div>
         </div>
       </div>

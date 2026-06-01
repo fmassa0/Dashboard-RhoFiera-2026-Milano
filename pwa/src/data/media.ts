@@ -1,9 +1,9 @@
 import { createStore, del, get, set } from "idb-keyval";
 
-// Store dedicato per non gonfiare la chiave principale `tf26-pwa`. Le visite
+// Store dedicato per non gonfiare la chiave principale `plast26-pwa`. Le visite
 // vengono ricaricate spesso, i blob no: tenerli separati evita di trascinare
 // MB di dati a ogni operazione.
-const store = createStore("tf26-media", "kv");
+const store = createStore("plast26-media", "kv");
 
 const MANIFEST_KEY = "manifest.v1";
 const BLOB_KEY = (id: string) => `blob.${id}`;

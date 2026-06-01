@@ -66,7 +66,7 @@ export function ExportView() {
         .filter((e) => visits[e.id] && (visits[e.id]!.visited || visits[e.id]!.notes || (visits[e.id]!.tags?.length ?? 0) > 0))
         .map((e) => toRow(e, visits[e.id]));
       const stamp = new Date().toISOString().slice(0, 16).replace(/[:T]/g, "-");
-      downloadXlsx(rows, `tuttofood-2026_visitati_${stamp}.xlsx`);
+      downloadXlsx(rows, `plast-2026_visitati_${stamp}.xlsx`);
     } finally {
       setBusy(null);
     }
@@ -77,7 +77,7 @@ export function ExportView() {
     try {
       const rows = exhibitors.map((e) => toRow(e, visits[e.id]));
       const stamp = new Date().toISOString().slice(0, 16).replace(/[:T]/g, "-");
-      downloadXlsx(rows, `tuttofood-2026_completo_${stamp}.xlsx`);
+      downloadXlsx(rows, `plast-2026_completo_${stamp}.xlsx`);
     } finally {
       setBusy(null);
     }
@@ -92,10 +92,10 @@ export function ExportView() {
       const { generateVisitReport } = await import("../data/report");
       const blob = await generateVisitReport(exhibitors, visits, media, {
         includePhotos,
-        title: "Tuttofood 2026 — Report visite",
+        title: "PLAST 2026 — Report visite",
       });
       const stamp = new Date().toISOString().slice(0, 16).replace(/[:T]/g, "-");
-      const filename = `tuttofood-2026_report_${stamp}.pdf`;
+      const filename = `plast-2026_report_${stamp}.pdf`;
 
       // Su mobile prova prima Web Share con file (apre WhatsApp/mail), così
       // l'utente non deve cercare il PDF tra i download. Fallback al download.
@@ -106,7 +106,7 @@ export function ExportView() {
       if (canShareFile && navigator.share) {
         try {
           await navigator.share({
-            title: "Report visite Tuttofood 2026",
+            title: "Report visite PLAST 2026",
             files: [file],
           });
           return;
@@ -223,7 +223,7 @@ export function ExportView() {
               const stamp = new Date().toISOString().slice(0, 16).replace(/[:T]/g, "-");
               const a = document.createElement("a");
               a.href = url;
-              a.download = `tf26-sync_${stamp}.json`;
+              a.download = `plast26-sync_${stamp}.json`;
               document.body.appendChild(a);
               a.click();
               a.remove();

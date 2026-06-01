@@ -61,7 +61,7 @@ export function MapView({ setView, setPadiglioneFilter }: Props) {
           <div className="relative w-full">
             <img
               src={`${base}/hall-plan-padiglioni.png`}
-              alt="Planimetria padiglioni Tuttofood 2026"
+              alt="Planimetria padiglioni PLAST 2026"
               className="block w-full h-auto select-none"
               draggable={false}
               loading="eager"
@@ -98,7 +98,7 @@ export function MapView({ setView, setPadiglioneFilter }: Props) {
             })}
           </div>
           <figcaption className="px-3 py-2 text-xs text-neutral-500">
-            Fonte: tuttofood.it
+            Fonte: plastonline.org
           </figcaption>
         </figure>
 

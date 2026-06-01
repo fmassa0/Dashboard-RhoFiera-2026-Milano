@@ -6,10 +6,10 @@ export default {
     extend: {
       colors: {
         brand: {
-          50: "#fff1f1",
-          500: "#e30613",
-          600: "#c20510",
-          700: "#9a040d",
+          50: "#eef4fb",
+          500: "#1560bd",
+          600: "#114e9b",
+          700: "#0c3a76",
         },
       },
       minHeight: {

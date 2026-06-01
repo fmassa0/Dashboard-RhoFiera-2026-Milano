@@ -2,7 +2,7 @@ import { get, set, createStore } from "idb-keyval";
 import type { AllVisits, AppSettings, VisitState } from "../types";
 
 // Dedicated DB so we don't collide with anything else.
-const store = createStore("tf26-pwa", "kv");
+const store = createStore("plast26-pwa", "kv");
 
 const VISITS_KEY = "visits.v1";
 const TAGS_KEY = "tags.v1";
@@ -68,7 +68,7 @@ export async function saveSettings(settings: AppSettings): Promise<void> {
 // =========== Sync bundle (export/import fra dispositivi) ===========
 
 export interface SyncBundle {
-  format: "tf26-sync";
+  format: "plast26-sync";
   version: 1;
   exportedAt: number;
   visits: AllVisits;
@@ -83,7 +83,7 @@ export async function exportBundle(): Promise<SyncBundle> {
     loadSettings(),
   ]);
   return {
-    format: "tf26-sync",
+    format: "plast26-sync",
     version: 1,
     exportedAt: Date.now(),
     visits,
@@ -138,8 +138,8 @@ export function mergeBundle(local: AllVisits, incoming: AllVisits): { merged: Al
 }
 
 export async function importBundle(bundle: SyncBundle): Promise<MergeStats> {
-  if (bundle.format !== "tf26-sync") {
-    throw new Error("Formato file non riconosciuto (atteso 'tf26-sync')");
+  if (bundle.format !== "plast26-sync") {
+    throw new Error("Formato file non riconosciuto (atteso 'plast26-sync')");
   }
   const localVisits = await loadVisits();
   const { merged, stats } = mergeBundle(localVisits, bundle.visits ?? {});

@@ -4,6 +4,7 @@ __pycache__/
 
 # Stato locale dello scraper
 progress.json
+progress_plast.json
 scrape.log
 *.bak
 

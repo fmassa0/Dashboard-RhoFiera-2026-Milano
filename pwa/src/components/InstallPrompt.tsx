@@ -6,7 +6,7 @@ interface BeforeInstallPromptEvent extends Event {
   readonly userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
 }
 
-const DISMISS_KEY = "tf26-install-dismissed";
+const DISMISS_KEY = "plast26-install-dismissed";
 
 export function InstallPrompt() {
   const [evt, setEvt] = useState<BeforeInstallPromptEvent | null>(null);
@@ -64,7 +64,7 @@ export function InstallPrompt() {
           <div className="font-semibold">Installa l&apos;app</div>
           <div className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
             {evt
-              ? "Aggiungi TF26 Visite alla home: funziona offline durante la fiera."
+              ? "Aggiungi PLAST26 Visite alla home: funziona offline durante la fiera."
               : "Su iOS: tocca Condividi e poi “Aggiungi a Home” per usarla offline."}
           </div>
         </div>

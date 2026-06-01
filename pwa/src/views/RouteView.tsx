@@ -13,7 +13,7 @@ interface Props {
   setView: (v: ViewName) => void;
 }
 
-const DEFAULT_START = "12";
+const DEFAULT_START = "9";
 
 export function RouteView({ setView }: Props) {
   const {
@@ -63,7 +63,7 @@ export function RouteView({ setView }: Props) {
     if (filteredPlanned.length === 0) return;
     const url = window.location.origin + window.location.pathname;
     const text = formatRouteAsText(route, start, { url });
-    const title = "Il mio percorso Tuttofood 2026";
+    const title = "Il mio percorso PLAST 2026";
 
     setShareMsg(null);
 

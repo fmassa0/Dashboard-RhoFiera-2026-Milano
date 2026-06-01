@@ -1,6 +1,8 @@
-// Hall positions on the cropped Tuttofood 2026 plan (hall-plan-padiglioni.png),
-// expressed as percentages so the overlay scales with the image at any size.
-// Coordinates measured visually from the official plan.
+// Hall positions on the PLAST 2026 plan (hall-plan-padiglioni.png, the official
+// Fiera Milano Rho plan from plastonline.org), expressed as percentages so the
+// overlay scales with the image at any size. PLAST occupa i 6 padiglioni al pian
+// terreno: 9, 11, 13, 15, 22, 24. Coordinate misurate visivamente dalla pianta
+// isometrica (sono approssimate per via della prospettiva: facili da ritoccare).
 export interface HallBox {
   id: string;
   left: number;
@@ -10,16 +12,12 @@ export interface HallBox {
 }
 
 export const HALL_BOXES: HallBox[] = [
-  { id: "12", left: 22.5, top: 18.5, width: 16.5, height: 19.5 },
-  { id: "8",  left: 39.0, top: 18.5, width: 18.5, height: 19.5 },
-  { id: "4",  left: 60.0, top: 19.0, width: 11.5, height: 14.5 },
-  { id: "2",  left: 71.5, top: 19.0, width: 17.5, height: 26.0 },
-  { id: "10", left: 22.5, top: 32.5, width: 26.0, height: 17.0 },
-  { id: "6",  left: 48.5, top: 32.5, width: 11.5, height: 17.0 },
-  { id: "7",  left: 35.0, top: 60.0, width: 13.5, height: 25.0 },
-  { id: "5",  left: 48.5, top: 60.0, width: 14.0, height: 25.0 },
-  { id: "3",  left: 67.5, top: 60.0, width: 9.5,  height: 25.0 },
-  { id: "1",  left: 77.0, top: 60.0, width: 12.0, height: 25.0 },
+  { id: "9",  left: 40.1, top: 42.1, width: 12.8, height: 18.5 },
+  { id: "11", left: 31.0, top: 46.3, width: 9.1,  height: 18.5 },
+  { id: "13", left: 24.0, top: 50.5, width: 9.4,  height: 14.4 },
+  { id: "15", left: 17.2, top: 52.3, width: 6.8,  height: 21.3 },
+  { id: "22", left: 17.4, top: 38.4, width: 8.6,  height: 13.4 },
+  { id: "24", left: 9.1,  top: 39.8, width: 8.3,  height: 13.4 },
 ];
 
 export interface Point {
